@@ -1,7 +1,7 @@
 Package: DATforDCEMRI
 Type: Package
 Title: Deconvolution Analysis Tool for Dynamic Contrast Enhanced MRI
-Version: 0.52
+Version: 0.53
 Date: 2011-03-30
 Author: Gregory Z. Ferl
 Maintainer: Gregory Z. Ferl <ferl.gregory@gene.com>
@@ -17,6 +17,6 @@ Description: This package performs voxel-wise deconvolution analysis of
         voxel-wise data.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2011-10-26 02:14:12 UTC; gzferl
+Packaged: 2012-03-29 00:34:04 UTC; gzferl
 Repository: CRAN
-Date/Publication: 2011-10-26 16:55:15
+Date/Publication: 2012-03-29 01:58:44

@@ -38,7 +38,14 @@ require(akima)
 require(R.oo)
 require(R.methodsS3)
 require(lattice)
-  
+
+AUMC <- function(AUMC.median, h.median, irf_time_vec, r){
+    #AUMC.median <- AUMC.median + 0.5*(h.median[r] + h.median[r+1])*0.5*(irf_time_vec[r] + irf_time_vec[r+1])
+     AUMC.median <- AUMC.median + 0.5*(h.median[r]*irf_time_vec[r] + h.median[r+1]*irf_time_vec[r+1])
+}
+
+#print(AUMC)
+
 DATrun <- function(file, slice, vp, border, maxCt, parameter.plot, cutoff.map, range.map, export.matlab, batch.mode, alpha.AIF, correct.trunc){
 
 DAT.version <- citation("DATforDCEMRI")[[1]]$note
@@ -50,8 +57,8 @@ ptm_total <- proc.time()[3]
 ###############################################################
 calch <- function(u, y, TIME_trunc){
 ###########TRY ALTERNATE PREPLOT PARAMETER HERE#################
-locfit_y <- preplot.locfit(y, newdata=0:max(TIME_trunc))  
-#locfit_y <- preplot.locfit(y, newdata=TIME_trunc)  
+locfit_y <- preplot(y, newdata=0:max(TIME_trunc))  
+#locfit_y <- preplot(y, newdata=TIME_trunc)  
 y_smooth <- locfit_y$fit
 
 n<-length(u)
@@ -253,8 +260,8 @@ ARTERY_smooth <- locfit.robust(ARTERY_trunc~TIME_trunc, acri="cp", alpha=alpha.A
 AIF_smooth <- ARTERY_smooth
 
 ###########TRY ALTERNATE PREPLOT PARAMETER HERE#################
-#locfit_u <- preplot.locfit(AIF_smooth, newdata=TIME_trunc)
-locfit_u <- preplot.locfit(AIF_smooth, newdata=0:max(TIME_trunc))
+#locfit_u <- preplot(AIF_smooth, newdata=TIME_trunc)
+locfit_u <- preplot(AIF_smooth, newdata=0:max(TIME_trunc))
 u_smooth <- locfit_u$fit
 
 Tmax <- max(TIME_trunc)
@@ -290,7 +297,9 @@ AUMC.median <- 0
     h_sum <- h.median[r] + h.median[r+1]
     t_sum <- irf_time_vec[r] + irf_time_vec[r+1]
     AUC.median <- AUC.median + 0.5*h_sum
-    AUMC.median <- AUMC.median + 0.25*h_sum*t_sum
+    #AUMC.median <- AUMC.median + 0.5*(h.median[r] + h.median[r+1])*0.5*(irf_time_vec[r] + irf_time_vec[r+1])
+    #AUMC.median <- AUMC.median + 0.5*(h.median[r]*irf_time_vec[r] + h.median[r+1]*irf_time_vec[r+1])
+    AUMC(AUMC.median, h.median, irf_time_vec, r)
   }
 AUCMRT.median <- AUC.median/(AUMC.median/AUC.median)*60
 
