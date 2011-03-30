@@ -68,6 +68,8 @@ Pass arguments.
 %% ...
 %%}
 \references{
+Ferl GZ (2011) DATforDCEMRI: An R Package for Deconvolution Analysis and Visualization of DCE-MRI Data. \emph{Journal of Statistical Software} \bold{44}, 1-18.
+
 Ferl GZ, Xu L, Friesenhahn M, Bernstein LJ, Barboriak DP, Port RE. (2010) An automated method for nonparametric kinetic analysis of clinical DCE-MRI data: application to glioblastoma treated with bevacizumab. \emph{Magn Reson Med.} \bold{63}, 1366-1375.
 }
 \author{

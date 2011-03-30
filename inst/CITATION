@@ -1,0 +1,20 @@
+citHeader("To cite DATforDCEMRI in publications use:")
+
+citEntry(entry = "Article",
+  title        = "{DATforDCEMRI}: An {R} Package for Deconvolution Analysis and Visualization of {DCE-MRI} Data",
+  author       = personList(as.person("Gregory Z. Ferl")),
+  journal      = "Journal of Statistical Software",
+  year         = "2011",
+  volume       = "44",
+  number       = "3",
+  pages        = "1--18",
+  url          = "http://www.jstatsoft.org/v44/i03/",
+  note	       = "R package version 0.51",
+
+  textVersion  =
+  paste("Gregory Z. Ferl (2011).",
+        "DATforDCEMRI: An R Package for Deconvolution Analysis and Visualization of DCE-MRI Data.",
+        "Journal of Statistical Software, 44(3), 1-18.",
+        "URL http://www.jstatsoft.org/v44/i03/.")
+)
+

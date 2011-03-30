@@ -15,7 +15,7 @@ require(lattice)
   
 DATrun <- function(file, slice, vp, border, maxCt, parameter.plot, cutoff.map, range.map, export.matlab, batch.mode, alpha.AIF, correct.trunc){
 
-DAT.version <- citation("DATforDCEMRI")$note
+DAT.version <- citation("DATforDCEMRI")[[1]]$note
 ptm_total <- proc.time()[3]
 
 
@@ -49,10 +49,10 @@ cat("\n")
 cat("###################################################################", "\n")
 cat("###################################################################", "\n")
 cat("######---- DECONVOLUTION ANALYSIS TOOL (DAT) FOR DCE-MRI ----######", "\n")
-cat("######----------- Genentech Development Science -------------######", "\n")
+cat("######----------- Genentech Development Sciences ------------######", "\n")
 cat("######--------------- Early Development PKPD ----------------######", "\n")
 cat("###################################################################", "\n")
-cat("######----------------", DAT.version,"----------------######", "\n")
+cat("######----------------", DAT.version,"---------------######", "\n")
 cat("###################################################################", "\n")
 cat("######---------------- ferl.gregory@gene.com ----------------######", "\n")
 cat("###################################################################", "\n")
