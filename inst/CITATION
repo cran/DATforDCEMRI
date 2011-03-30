@@ -9,7 +9,7 @@ citEntry(entry = "Article",
   number       = "3",
   pages        = "1--18",
   url          = "http://www.jstatsoft.org/v44/i03/",
-  note	       = "R package version 0.51",
+  note	       = "R package version 0.52",
 
   textVersion  =
   paste("Gregory Z. Ferl (2011).",

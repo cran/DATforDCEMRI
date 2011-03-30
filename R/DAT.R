@@ -1,3 +1,29 @@
+#    DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI
+#    Copyright 2011 Genentech, Inc.
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+#    For questions or comments, please contact
+#    Gregory Z. Ferl, Ph.D.
+#    Genentech, Inc.
+#    Development Sciences
+#    1 DNA Way, Mail stop 463A
+#    South San Francisco, CA, United States of America
+#    E-mail: ferl.gregory@gene.com
+
+
 DAT <-
 function(file="nodata", slice=0, vp=0, border=20, maxCt=0.66, parameter.plot="AUCMRT", cutoff.map=0.85, range.map=1.5, export.matlab=FALSE, batch.mode=FALSE, alpha.AIF=c(0,0,2000), correct.trunc=TRUE, kep.nom=0.5, ...){
 
@@ -46,17 +72,20 @@ return(calch_out)
 ###################################################
 
 cat("\n")
-cat("###################################################################", "\n")
-cat("###################################################################", "\n")
-cat("######---- DECONVOLUTION ANALYSIS TOOL (DAT) FOR DCE-MRI ----######", "\n")
-cat("######----------- Genentech Development Sciences ------------######", "\n")
-cat("######--------------- Early Development PKPD ----------------######", "\n")
-cat("###################################################################", "\n")
-cat("######----------------", DAT.version,"---------------######", "\n")
-cat("###################################################################", "\n")
-cat("######---------------- ferl.gregory@gene.com ----------------######", "\n")
-cat("###################################################################", "\n")
-cat("###################################################################", "\n")
+cat("#######################################################################", "\n")
+cat("#####-- DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI --#####", "\n")
+cat("#####-------------------", DAT.version,"------------------#####", "\n")
+cat("#####--------------- Copyright 2011 Genentech, Inc. --------------#####", "\n")
+cat("#######################################################################", "\n")
+cat("#####--------- For questions and comments please contact ---------#####", "\n")
+cat("#####---------------------- Gregory Z. Ferl ----------------------#####", "\n")
+cat("#####------------------- ferl.gregory@gene.com -------------------#####", "\n")
+cat("#######################################################################", "\n")
+cat("#####------ DATforDCEMRI comes with ABSOLUTELY NO WARRANTY. ------#####", "\n")
+cat("#####------- This is free software, and you are welcome to -------#####", "\n")
+cat("#####--------- redistribute it under certain conditions. ---------#####", "\n")
+cat("#####---- See the GNU General Public License for more details. ---#####", "\n")
+cat("#######################################################################", "\n")
 cat("\n")
 
 
@@ -594,7 +623,7 @@ image(MAP_for_plot, col=palette(colorRampPalette(c("black", "red","yellow"))(100
 text(x_min/nx+(x_max/nx-x_min/nx)*0.96, y_min/ny+(y_max/ny-y_min/ny)*0.98, "close", col="green")
 text(x_min/nx+(x_max/nx-x_min/nx)*0.08, y_min/ny+(y_max/ny-y_min/ny)*0.98, "print to PDF", col="green")
 text(x_min/nx+(x_max/nx-x_min/nx)*0.135, y_min/ny+(y_max/ny-y_min/ny)*0.02, "display median IRF", col="green")
-text(x_min/nx+(x_max/nx-x_min/nx)*0.73, y_min/ny+(y_max/ny-y_min/ny)*0.02, paste("DAT for DCE-MRI:", DAT.version), col="darkgrey")
+text(x_min/nx+(x_max/nx-x_min/nx)*0.73, y_min/ny+(y_max/ny-y_min/ny)*0.02, paste("DAT for DCE-MRI:", DAT.version), col="green")
 legend <- seq(0,MAP_ul,by=0.001)
 dim(legend) <- c(1,length(legend))
 
@@ -642,7 +671,36 @@ if(xx > (x_max-0.1*xdim) && yy > (y_max-0.03*ydim)){
   break()
 }
 
-
+if(xx > (x_max-0.5*xdim) && yy < (y_min+0.06*ydim)){
+cat("---", "\n")
+cat("    ###########################################################################", "\n")
+cat("    DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI", "\n")
+cat("    Copyright 2011 Genentech, Inc.", "\n")
+cat("\n")
+cat("    This program is free software; you can redistribute it and/or modify", "\n")
+cat("    it under the terms of the GNU General Public License as published by", "\n")
+cat("    the Free Software Foundation; either version 2 of the License, or", "\n")
+cat("    (at your option) any later version.", "\n")
+cat("\n")
+cat("    This program is distributed in the hope that it will be useful,", "\n")
+cat("    but WITHOUT ANY WARRANTY; without even the implied warranty of", "\n")
+cat("    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the", "\n")
+cat("    GNU General Public License for more details.", "\n")
+cat("\n")
+cat("    You should have received a copy of the GNU General Public License", "\n")
+cat("    along with this program; if not, write to the Free Software", "\n")
+cat("    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA", "\n")
+cat("\n")
+cat("    For questions or comments, please contact", "\n")
+cat("    Gregory Z. Ferl, Ph.D.", "\n")
+cat("    Genentech, Inc.", "\n")
+cat("    Development Sciences", "\n")
+cat("    1 DNA Way, Mail stop 463A", "\n")
+cat("    South San Francisco, CA, United States of America", "\n")
+cat("    E-mail: ferl.gregory@gene.com", "\n")
+cat("    ###########################################################################", "\n")
+cat("---", "\n")
+}
 
 xx_old <- xx
 yy_old <- yy
