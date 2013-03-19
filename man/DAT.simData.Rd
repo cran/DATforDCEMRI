@@ -1,27 +1,17 @@
-%    DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI
-%    Copyright 2011 Genentech, Inc.
-%
-%    This program is free software; you can redistribute it and/or modify
-%    it under the terms of the GNU General Public License as published by
-%    the Free Software Foundation; either version 2 of the License, or
-%    (at your option) any later version.
-%
-%    This program is distributed in the hope that it will be useful,
-%    but WITHOUT ANY WARRANTY; without even the implied warranty of
-%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%    GNU General Public License for more details.
-%
-%    You should have received a copy of the GNU General Public License
-%    along with this program; if not, write to the Free Software
-%    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-%
-%    For questions or comments, please contact
-%    Gregory Z. Ferl, Ph.D.
-%    Genentech, Inc.
-%    Development Sciences
-%    1 DNA Way, Mail stop 463A
-%    South San Francisco, CA, United States of America
-%    E-mail: ferl.gregory@gene.com
+%%    DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI
+%%    Copyright 2013 Genentech, Inc.
+%%
+%%    This package is distributed under the
+%%    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
+%%    at http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+%%
+%%    For questions or comments, please contact
+%%    Gregory Z. Ferl, Ph.D.
+%%    Genentech, Inc.
+%%    Development Sciences
+%%    1 DNA Way, Mail stop 463A
+%%    South San Francisco, CA, United States of America
+%%    E-mail: ferl.gregory@gene.com
 
 
 \name{DAT.simData}

@@ -1,31 +1,26 @@
-#    DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI
-#    Copyright 2011 Genentech, Inc.
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 2 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program; if not, write to the Free Software
-#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-#
-#    For questions or comments, please contact
-#    Gregory Z. Ferl, Ph.D.
-#    Genentech, Inc.
-#    Development Sciences
-#    1 DNA Way, Mail stop 463A
-#    South San Francisco, CA, United States of America
-#    E-mail: ferl.gregory@gene.com
+##    DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI
+##    Copyright 2013 Genentech, Inc.
+##
+##    This package is distributed under the
+##    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
+##    at http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+##
+##    For questions or comments, please contact
+##    Gregory Z. Ferl, Ph.D.
+##    Genentech, Inc.
+##    Development Sciences
+##    1 DNA Way, Mail stop 463A
+##    South San Francisco, CA, United States of America
+##    E-mail: ferl.gregory@gene.com
+
 
 
 DAT <-
 function(file="nodata", slice=0, vp=0, border=20, maxCt=0.66, parameter.plot="AUCMRT", cutoff.map=0.85, range.map=1.5, export.matlab=FALSE, batch.mode=FALSE, alpha.AIF=c(0,0,2000), correct.trunc=TRUE, kep.nom=0.5, ...){
+
+    ## Workaround for "DAT: no visible binding for global variable 'DAT.simData'" NOTE
+    ## Lazy Load instead
+    ## DAT.simData <- NULL
 
 if(export.matlab==TRUE)
   require(R.matlab)
@@ -48,7 +43,7 @@ AUMC <- function(AUMC.median, h.median, irf_time_vec, r){
 
 DATrun <- function(file, slice, vp, border, maxCt, parameter.plot, cutoff.map, range.map, export.matlab, batch.mode, alpha.AIF, correct.trunc){
 
-DAT.version <- citation("DATforDCEMRI")[[1]]$note
+DAT.version <- 0.55
 ptm_total <- proc.time()[3]
 
 
@@ -57,8 +52,8 @@ ptm_total <- proc.time()[3]
 ###############################################################
 calch <- function(u, y, TIME_trunc){
 ###########TRY ALTERNATE PREPLOT PARAMETER HERE#################
-locfit_y <- preplot(y, newdata=0:max(TIME_trunc))  
-#locfit_y <- preplot(y, newdata=TIME_trunc)  
+locfit_y <- preplot(y, newdata=0:max(TIME_trunc))
+#locfit_y <- preplot(y, newdata=TIME_trunc)
 y_smooth <- locfit_y$fit
 
 n<-length(u)
@@ -69,7 +64,7 @@ ind<-ind+2
 A <- matrix(c(0,u)[ind],nrow=n,ncol=n)
 h <- solve(A,y_smooth)
 calch_out <- list(h, y_smooth)
-names(calch_out) <-c("h", "y_smooth") 
+names(calch_out) <-c("h", "y_smooth")
 return(calch_out)
 }
 
@@ -81,8 +76,8 @@ return(calch_out)
 cat("\n")
 cat("#######################################################################", "\n")
 cat("#####-- DATforDCEMRI: a Deconvolution Analysis Tool for DCE-MRI --#####", "\n")
-cat("#####-------------------", DAT.version,"------------------#####", "\n")
-cat("#####--------------- Copyright 2011 Genentech, Inc. --------------#####", "\n")
+cat("#####------------------- R package version",DAT.version,"------------------#####", "\n")
+cat("#####--------------- Copyright 2013 Genentech, Inc. --------------#####", "\n")
 cat("#######################################################################", "\n")
 cat("#####--------- For questions and comments please contact ---------#####", "\n")
 cat("#####---------------------- Gregory Z. Ferl ----------------------#####", "\n")
@@ -91,7 +86,10 @@ cat("#######################################################################", "
 cat("#####------ DATforDCEMRI comes with ABSOLUTELY NO WARRANTY. ------#####", "\n")
 cat("#####------- This is free software, and you are welcome to -------#####", "\n")
 cat("#####--------- redistribute it under certain conditions. ---------#####", "\n")
-cat("#####---- See the GNU General Public License for more details. ---#####", "\n")
+cat("#####-------------------- See Creative Commons -------------------#####", "\n")
+cat("#####------ Attribution-NonCommercial-ShareAlike 3.0 License -----#####", "\n")
+cat("#####-- at http://creativecommons.org/licenses/by-nc-sa/3.0/us/ --#####", "\n")
+cat("#####------------------------ for details. -----------------------#####", "\n")
 cat("#######################################################################", "\n")
 cat("\n")
 
@@ -124,7 +122,7 @@ if(length(names(data)) >= 8)
 
 if(mat.original == TRUE){
 
-if(length(dim(data$maskROI))==3){  
+if(length(dim(data$maskROI))==3){
   for(i in length(data$maskROI[1,1,]):1){
     if(max(data$maskROI[,,i])==1)
       roi_start <- i
@@ -188,7 +186,7 @@ if(length(mask.roi)==length(mask.roi[mask.roi==1]))
 
 if(max(mask.roi)>1 || min(mask.roi)<0)
   stop("Your ROI mask contains values greater than one and/or less than zero; voxels within the ROI should have a value of ``1'' and all other voxels should have a value of ``0''.")
-  
+
 
 ###EXTRACT THE AIF VECTOR FROM THE DATA FILE#########################
 AIF <- as.vector(data$vectorAIF)
@@ -216,12 +214,12 @@ if(slice!=0)
 DATE <- date()
 if(length(strsplit(DATE,split="  ")[[1]])==2){
   full_date <- strsplit(DATE,split="  ")[[1]]
-  full_date_1 <- full_date[1] 
+  full_date_1 <- full_date[1]
   full_date_1 <- strsplit(full_date_1, split=" ")[[1]]
   full_date_2 <- full_date[2]
   full_date_2 <- strsplit(full_date_2, split=" ")[[1]]
   month <- full_date_1[2]
-  day   <- full_date_2[1]   
+  day   <- full_date_2[1]
   time  <- full_date_2[2]
   year  <- full_date_2[3]
   }
@@ -248,7 +246,7 @@ ptm <- proc.time()[3]
 artery_data <- data.frame(vector.times*60, AIF)
 names(artery_data) <- c("TIME", "ARTERY")
 data_artery_peak <- subset(artery_data, artery_data$ARTERY == max(artery_data$ARTERY))
-data_remove_artery_prepeak <- subset(artery_data, artery_data$TIME >= data_artery_peak$TIME) 
+data_remove_artery_prepeak <- subset(artery_data, artery_data$TIME >= data_artery_peak$TIME)
 frames_to_peak <- length(artery_data[,1]) - length(data_remove_artery_prepeak[,1]) + 1
 TIME   <- data_remove_artery_prepeak$TIME
 ARTERY <- data_remove_artery_prepeak$ARTERY
@@ -256,7 +254,7 @@ TIME_trunc <- TIME[seq(1,length(TIME)-1,by=1)]
 TIME_trunc <- TIME_trunc - TIME_trunc[1]
 ARTERY_trunc <- ARTERY[seq(1,length(ARTERY)-1,by=1)]
 
-ARTERY_smooth <- locfit.robust(ARTERY_trunc~TIME_trunc, acri="cp", alpha=alpha.AIF)   
+ARTERY_smooth <- locfit.robust(ARTERY_trunc~TIME_trunc, acri="cp", alpha=alpha.AIF)
 AIF_smooth <- ARTERY_smooth
 
 ###########TRY ALTERNATE PREPLOT PARAMETER HERE#################
@@ -273,8 +271,8 @@ TUMOR.median <- 1:length(map_cc_slice[1,1,])
 for(i in 1:length(map_cc_slice[1,1,]))
   TUMOR.median[i] <- median(map_cc_slice[,,i][mask.roi==1], na.rm=TRUE)
 
-TUMOR.median <- TUMOR.median[seq(frames_to_peak,length(TUMOR.median),by=1)] 
-  
+TUMOR.median <- TUMOR.median[seq(frames_to_peak,length(TUMOR.median),by=1)]
+
 TUMOR.median_corr <- TUMOR.median - vp*ARTERY
 TUMOR.median_corr_shifted <- TUMOR.median_corr[seq(2,length(TUMOR.median_corr),by=1)]
 TUMOR.median_smooth <- locfit.robust(TUMOR.median_corr_shifted~TIME_trunc, acri="cp")
@@ -283,7 +281,7 @@ calch.out <- calch(u_smooth, TUMOR.median_smooth, TIME_trunc)
 h.median <- calch.out$h
 tumor_smooth_median <- calch.out$y_smooth
 
-#n <- length(h.median) 
+#n <- length(h.median)
 #n2 <- Tmax
 #interval <- n2/(n-1)
 #irf_time_vec <- seq(0, n2, by=interval)
@@ -297,9 +295,7 @@ AUMC.median <- 0
     h_sum <- h.median[r] + h.median[r+1]
     t_sum <- irf_time_vec[r] + irf_time_vec[r+1]
     AUC.median <- AUC.median + 0.5*h_sum
-    #AUMC.median <- AUMC.median + 0.5*(h.median[r] + h.median[r+1])*0.5*(irf_time_vec[r] + irf_time_vec[r+1])
-    #AUMC.median <- AUMC.median + 0.5*(h.median[r]*irf_time_vec[r] + h.median[r+1]*irf_time_vec[r+1])
-    AUMC(AUMC.median, h.median, irf_time_vec, r)
+    AUMC.median <- AUMC.median + 0.5*(h.median[r]*irf_time_vec[r] + h.median[r+1]*irf_time_vec[r+1])
   }
 AUCMRT.median <- AUC.median/(AUMC.median/AUC.median)*60
 
@@ -318,7 +314,7 @@ assign("map.h", array(rep(0,nx*ny*length(u_smooth)), dim=c(nx,ny,length(u_smooth
 for(i in border:(nx-border)){
   for(j in border:(ny-border)){
       TUMOR <- map_cc_slice[i,j,]
-      TUMOR <- TUMOR[seq(frames_to_peak,length(TUMOR),by=1)] 
+      TUMOR <- TUMOR[seq(frames_to_peak,length(TUMOR),by=1)]
         if(is.finite(mean(TUMOR))!= FALSE){
           if(max(TUMOR) < maxCt*max(ARTERY) & max(TUMOR)>0){
             TUMOR_corr <- TUMOR - vp*ARTERY
@@ -326,14 +322,14 @@ for(i in border:(nx-border)){
             tumor_data_array[i,j,] <- TUMOR_corr_shifted
 
             TUMOR_smooth <- locfit.robust(TUMOR_corr_shifted~TIME_trunc, acri="cp")
-            
+
             calch.out <- calch(u_smooth, TUMOR_smooth, TIME_trunc)
             h <- calch.out$h
             tumor_smooth_array[i,j,] <- calch.out$y_smooth
-            
+
             #if(abs(min(h)) < 0.1*abs(max(h[2:length(h)])) || min(h) >= 0){
               ####CALCULATE AUC AND MRT OF A CONC_TIME CURVE#################
-              #n <- length(h) 
+              #n <- length(h)
               #n2 <- Tmax
               #interval <- n2/(n-1)
               #irf_time_vec <- seq(0, n2, by=interval)
@@ -341,13 +337,13 @@ for(i in border:(nx-border)){
 
               n <- length(h)
               irf_time_vec <- 0:max(TIME_trunc)
-            
+
               AUC <- 0
               AUMC <- 0
 
               ###TEST THIS TIME VEC#######
               #irf_time_vec <- 0:max(TIME_trunc)
-            
+
               for(r in 1:(n-1)){
                 #h_sum <- h[r] + h[r+1]
                 #t_sum <- irf_time_vec[r] + irf_time_vec[r+1]
@@ -360,10 +356,10 @@ for(i in border:(nx-border)){
              map.AUC[i,j] <- AUC
              map.AUCMRT[i,j] <- AUC/(AUMC/AUC)*60
              map.h[i,j,] <- h
-             
+
             #}
           }
-        }  
+        }
 
 
 
@@ -376,7 +372,7 @@ for(i in border:(nx-border)){
 if(correct.trunc==TRUE){
   #kep_nom <- median(map.AUCMRT[map.AUCMRT>0])/median(map.AUC[map.AUC>0])
   t_scan <- max(TIME_trunc)/60
-  ve_trunc_error <- 1-exp(-kep.nom*t_scan) 
+  ve_trunc_error <- 1-exp(-kep.nom*t_scan)
   Ktrans_trunc_error <- (1-exp(-kep.nom*t_scan))^2/(1-(1+kep.nom*t_scan)*exp(-kep.nom*t_scan))
   map.AUC <- map.AUC / ve_trunc_error
   map.AUCMRT <- map.AUCMRT / Ktrans_trunc_error
@@ -385,7 +381,7 @@ if(correct.trunc==TRUE){
   AUMC.median <- AUMC.median / Ktrans_trunc_error
 }
 
-cat("..done in", format((proc.time()[3]-ptm)/60, digits=2), "minutes.", "\n") 
+cat("..done in", format((proc.time()[3]-ptm)/60, digits=2), "minutes.", "\n")
 }
 
 
@@ -428,15 +424,15 @@ mask.roi <- data$maskROI
 map.AUC <- data$mapAUC
 map.AUCMRT <- data$mapAUCMRT
 map.h <- data$mapIRF
-tumor_data_array <- data$mapCCtransformed  
-tumor_smooth_array <- data$mapCCsmoothed  
+tumor_data_array <- data$mapCCtransformed
+tumor_smooth_array <- data$mapCCsmoothed
 AIF_smooth<- data$vectorAIFsmoothed
-ARTERY_trunc <- data$vectorAIFtrunc  
-TIME_trunc<- data$vectorTimesTrunc 
+ARTERY_trunc <- data$vectorAIFtrunc
+TIME_trunc<- data$vectorTimesTrunc
 tumor_smooth_median <- data$CCmedianSmoothed
-h.median <- data$IRFmedian 
-AUC.median <- data$AUCmedian 
-AUCMRT.median <- data$AUCMRTmedian 
+h.median <- data$IRFmedian
+AUC.median <- data$AUCmedian
+AUCMRT.median <- data$AUCMRTmedian
 TUMOR.median_corr_shifted <- data$CCmedianTransformed
 filename3 <- data$filenameS
 rm(data)
@@ -472,7 +468,7 @@ if(parameter.plot=="AUC"){
   map.AUC[map.AUC>=map_ul*0.99] <- map_ul*0.99
 
   map.deconv.toplot <- map.AUC
- 
+
   plot.title <- "AUC of the Impulse Response Function"
   plot.units <- "dimensionless"
 
@@ -587,7 +583,7 @@ y_max <- ny
         y <- y-1
      }
 
-  
+
 if(parameter.plot == "AUC")
   MAP <- map.AUC
 if(parameter.plot == "AUCMRT")
@@ -871,7 +867,10 @@ if(file=="nodata"){
   cat("###################################################################", "\n")
   cat("no data file specified...", "\n")
   cat("...loading simulated data set...", "\n")
-  data(DAT.simData)
+
+  ## Lazy Load instead
+  ## data(DAT.simData)
+
   cat("...writing simulated data to file...", "\n")
   dcemri.data <- DAT.simData
   save(dcemri.data, file="simulatedDCEMRI.RData")
